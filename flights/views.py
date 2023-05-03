@@ -5,7 +5,7 @@ from .models import Flight, Airport, Passenger
 
 # Create your views here.
 def index(request):
-    return render(request, "flights/index.html", {
+    return render(request, "templates/flights/index.html", {
         "flights": Flight.objects.all()
     })
 
@@ -14,7 +14,7 @@ def flight(request, flight_id):
         flight = Flight.objects.get(pk=flight_id)
     except Flight.DoesNotExist:
         raise Http404("Flight does not exist")
-    return render(request, "flights/flight.html", {
+    return render(request, "templates/flights/flight.html", {
         "flight": flight,
         "passengers": flight.passenger.all(),
         "non_passengers": Passenger.objects.exclude(flights=flight).all()
